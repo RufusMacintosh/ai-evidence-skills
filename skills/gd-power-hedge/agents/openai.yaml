@@ -1,4 +1,0 @@
-interface:
-  display_name: "广东售电签约分析"
-  short_description: "依据可追溯规则核验售电公司中长期签约并计算分时覆盖与敞口"
-  default_prompt: "使用 $gd-power-hedge，分析广东售电公司的中长期合同覆盖、分时敞口和规则核验缺口。"
