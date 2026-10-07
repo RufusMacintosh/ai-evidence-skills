@@ -1,8 +1,16 @@
-name: checks
+name: Independent project checks
 on: [push, pull_request]
 jobs:
-  tools:
+  project:
+    name: ${{ matrix.project }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [review-with-evidence, gd-power-hedge]
+    defaults:
+      run:
+        working-directory: projects/${{ matrix.project }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

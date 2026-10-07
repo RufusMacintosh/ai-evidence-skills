@@ -1,0 +1,9 @@
+test_duplicate (test_tools.EvidenceTests.test_duplicate) ... ok
+test_fabricated_quote (test_tools.EvidenceTests.test_fabricated_quote) ... ok
+test_reason_limit (test_tools.EvidenceTests.test_reason_limit) ... ok
+test_valid_local_match (test_tools.EvidenceTests.test_valid_local_match) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK

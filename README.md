@@ -1,66 +1,37 @@
-# AI Evidence Skills
+# 两个独立的AI工作流项目
 
-面向研究论文文献综述章节与广东售电合同覆盖分析的两项Agent Skills。项目重点是证据追溯、业务口径区分和可复现检查。
+这里是展示入口。文献综述和广东售电项目分别维护各自的代码、示例、设计说明、工作记录和测试；两者没有代码依赖。
 
-## 已实现与工作流要求
+## ① ReviewWithEvidence · 文献综述章节助手
 
-| 项目 | 已实现的Python工具 | skill规定的AI工作流 |
-| --- | --- | --- |
-| ReviewWithEvidence | 文献字段检查、摘要快照中的引文匹配、理由≤10字符、重复ID检查 | 分析范文论证方式、组织综述章节、关联论点证据、核对官方期刊指南 |
-| PowerHedge | MWh合同覆盖率、分时缺口/超额、传入规则记录的范围与阈值算术检查 | 核验广东适用规则，解释敞口，材料充分时比较候选方案 |
+[进入文献综述项目](projects/review-with-evidence/README.md)
 
-右栏是执行指令，不代表已经实现自动检索、规则提取或真实材料上的质量评测。两个工具可独立运行；AI工作流需要支持Agent Skills的客户端及可访问材料。
+服务研究论文中的文献综述章节。已实现文献字段检查、摘要快照中的原句匹配、十字以内参考理由和重复ID检查；skill定义范文分析、主题组织及论点证据追溯流程。
 
-## 快速运行
+- [工作记录](projects/review-with-evidence/WORKLOG.md)
+- [设计说明](projects/review-with-evidence/docs/DESIGN.md)
+- [验证记录](projects/review-with-evidence/docs/EVALUATION.md)：4项单元测试、2个合成CLI场景。
+- [Skill入口](projects/review-with-evidence/skills/review-with-evidence/SKILL.md)
 
-代码仅使用Python标准库，无模型API或第三方Python包依赖。已记录的本地验证使用Python 3.12.14；CI配置使用3.11。其他版本兼容性未全面验证。
+## ② PowerHedge · 广东售电合同覆盖分析
 
-```bash
-python3 scripts/reproduce.py
-```
+[进入广东电力项目](projects/gd-power-hedge/README.md)
 
-该命令运行4个合成CLI场景和10项单元测试，将实际输出与运行记录写入docs/results/。分别运行工具：
+服务售电公司的中长期合同覆盖分析。已实现预测覆盖率、分时缺口与超额、传入规则记录的范围和阈值检查；skill定义官方规则核验及数据充分时的候选方案分析流程。
 
-```bash
-python3 skills/review-with-evidence/scripts/verify_evidence.py examples/evidence-synthetic.json
-python3 skills/gd-power-hedge/scripts/analyze_coverage.py examples/power-synthetic.json
-python3 -m unittest discover -s tests -v
-```
+- [工作记录](projects/gd-power-hedge/WORKLOG.md)
+- [设计说明](projects/gd-power-hedge/docs/DESIGN.md)
+- [验证记录](projects/gd-power-hedge/docs/EVALUATION.md)：6项单元测试、2个合成CLI场景。
+- [Skill入口](projects/gd-power-hedge/skills/gd-power-hedge/SKILL.md)
 
-示例全部为合成材料。文献示例不是真实论文，电力示例不是市场记录；example.invalid链接用于说明输入结构，不是来源真实性验证。
+## 结构与验证
 
-## 一个可以复核的业务判断
+两个projects/目录均为可单独运行、可迁移到独立repository的完整项目。GitHub Actions为两者分别运行检查，日志以各自项目名展示。当前它们仍位于同一repository，不能称为两个独立仓库。
 
-| 时段 | 预测负荷MWh | 合同覆盖MWh | 缺口MWh | 超额MWh |
-| --- | ---: | ---: | ---: | ---: |
-| 合成高峰 | 100 | 50 | 50 | 0 |
-| 合成低谷 | 100 | 150 | 0 | 50 |
-| 合计 | 200 | 200 | 50 | 50 |
+在对应项目目录运行python3 scripts/reproduce.py，即可重跑该项目的示例与测试。初始实现采用AI辅助开发；工作量按已交付任务与文件记录呈现，不虚构耗时、个人独立编码经历或业务效果。拆分沿用已有实现，不计作新增研发功能。
 
-总预测覆盖率为100%，分时缺口和超额仍各为50MWh。因此工具分别累计缺口与超额，不能先将它们抵消。这里没有已核验签约规则，输出为pending_verification；不能据此判断广东监管达标或最优交易方案。
+示例均为合成材料。真实文献来源、目标期刊要求、广东当期签约比例与完整结算规则仍需相应原文和材料核验。没有真实业务回测或投稿效果证明。
 
-## 设计与验证证据
+## 迁移记录
 
-- [设计取舍](docs/DESIGN.md)：需求如何落实到字段、公式和测试，哪些判断仍需原文与人工核验。
-- [验证记录](docs/EVALUATION.md)：10项测试的断言范围、正例与失败例、复现命令和现有CI记录。
-- [实际运行结果](docs/results/receipt.json)：Python版本、命令、时间和退出码。
-- [后续计划](PROJECT_PLAN.md)：按材料、实现和验收证据推进。
-
-## 使用skill
-
-将skills/里的两个目录分别放入实际客户端规定的skills目录，按其官方说明加载。仓库发布不等于已在客户端安装。
-
-- “使用 $review-with-evidence，读取我的研究问题、期刊指南、范文和来源文献，先生成主题提纲与证据表，再写相关工作章节。”
-- “使用 $gd-power-hedge，读取售电合同和预测负荷，核验广东适用规则，分析分时敞口及待补信息。”
-
-## 当前验证范围
-
-文本匹配通过不证明论文真实、原句完整或论点得到支持。verified是规则输入中的人工标记；工具没有验证该声明或官方来源。当前没有广东完整结算、现货预测、签约优化、交易申报或真实业务回测。
-
-目标期刊、论文主题和范文尚未提供；广东当期具体签约比例与结算公式尚未完成官方原文核验。未知项保留为未知，不报告论文录用保证、收益改善或未经评测的准确率。
-
-## 开发记录
-
-初始代码和文档采用AI辅助开发。项目的业务需求、实现、测试与后续修改分别留存证据；个人贡献按实际完成的内容说明，不声称未经记录的独立编码经历或客户落地。
-
-真实材料放到被git忽略的private-data/，不提交密钥、客户负荷或合同原件。第三方文献与数据的再分发许可需分别核对。
+原型的混合展示已被独立项目目录替代。历史版本保留在Git历史和split-review-with-evidence、split-gd-power-hedge分支中。创建独立仓库的操作尚未完成；一旦该能力可用，可直接迁移对应projects/目录，保留清楚的来源记录。
