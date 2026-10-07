@@ -1,0 +1,64 @@
+{
+  "recorded_at_utc": "2026-10-07T04:46:14.386447+00:00",
+  "python_version": "3.12.14",
+  "data_kind": "synthetic fixtures; not real papers or market data",
+  "cases": [
+    {
+      "name": "evidence-valid",
+      "command_args": [
+        "skills/review-with-evidence/scripts/verify_evidence.py",
+        "examples/evidence-synthetic.json"
+      ],
+      "expected_exit_code": 0,
+      "actual_exit_code": 0,
+      "exit_code_matches": true,
+      "stderr": ""
+    },
+    {
+      "name": "evidence-fabricated",
+      "command_args": [
+        "skills/review-with-evidence/scripts/verify_evidence.py",
+        "examples/evidence-fabricated-synthetic.json"
+      ],
+      "expected_exit_code": 1,
+      "actual_exit_code": 1,
+      "exit_code_matches": true,
+      "stderr": ""
+    },
+    {
+      "name": "power-mismatch",
+      "command_args": [
+        "skills/gd-power-hedge/scripts/analyze_coverage.py",
+        "examples/power-synthetic.json"
+      ],
+      "expected_exit_code": 0,
+      "actual_exit_code": 0,
+      "exit_code_matches": true,
+      "stderr": ""
+    },
+    {
+      "name": "power-duplicate",
+      "command_args": [
+        "skills/gd-power-hedge/scripts/analyze_coverage.py",
+        "examples/power-duplicate-synthetic.json"
+      ],
+      "expected_exit_code": 1,
+      "actual_exit_code": 1,
+      "exit_code_matches": true,
+      "stderr": ""
+    }
+  ],
+  "unit_tests": {
+    "command_args": [
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "exit_code": 0,
+    "log": "unit-tests.txt"
+  },
+  "all_commands_matched_expected_exit_codes": true
+}

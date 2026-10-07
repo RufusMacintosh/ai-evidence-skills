@@ -1,0 +1,18 @@
+{
+  "data_kind": "synthetic; not a real paper",
+  "papers": [
+    {
+      "id": "synthetic-1",
+      "title": "Synthetic example — not a real paper",
+      "authors": [
+        "Example Author"
+      ],
+      "year": 2026,
+      "source_url": "https://example.invalid/synthetic-paper",
+      "abstract_text": "This is synthetic evidence. Results depend on context.",
+      "quote": "The method always works.",
+      "quote_location": "Synthetic abstract, sentence 2",
+      "reason": "说明适用边界"
+    }
+  ]
+}

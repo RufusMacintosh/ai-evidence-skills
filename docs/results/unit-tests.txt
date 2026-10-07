@@ -1,0 +1,15 @@
+test_duplicate (test_tools.EvidenceTests.test_duplicate) ... ok
+test_fabricated_quote (test_tools.EvidenceTests.test_fabricated_quote) ... ok
+test_reason_limit (test_tools.EvidenceTests.test_reason_limit) ... ok
+test_valid_local_match (test_tools.EvidenceTests.test_valid_local_match) ... ok
+test_duplicate_slot (test_tools.PowerTests.test_duplicate_slot) ... ok
+test_invalid_numeric (test_tools.PowerTests.test_invalid_numeric) ... ok
+test_rule_separate_denominator_and_expiry (test_tools.PowerTests.test_rule_separate_denominator_and_expiry) ... ok
+test_total_masks_mismatch (test_tools.PowerTests.test_total_masks_mismatch) ... ok
+test_wrong_region_rule (test_tools.PowerTests.test_wrong_region_rule) ... ok
+test_zero_load_surplus (test_tools.PowerTests.test_zero_load_surplus) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.001s
+
+OK

@@ -1,0 +1,25 @@
+{
+  "region": "广东",
+  "subject": "售电公司",
+  "unit": "MWh",
+  "as_of": "2026-10-06",
+  "period": "2026-11",
+  "data_kind": "synthetic, not real market data",
+  "rows": [
+    {
+      "slot": "synthetic-peak",
+      "load_mwh": 100,
+      "contract_mwh": 50
+    },
+    {
+      "slot": "synthetic-valley",
+      "load_mwh": 100,
+      "contract_mwh": 150
+    },
+    {
+      "slot": "synthetic-peak",
+      "load_mwh": 100,
+      "contract_mwh": 50
+    }
+  ]
+}
