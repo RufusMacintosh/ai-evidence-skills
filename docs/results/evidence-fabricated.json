@@ -1,7 +1,0 @@
-{
-  "ok": false,
-  "errors": [
-    "papers[0]: quote not found in abstract snapshot"
-  ],
-  "scope": "structure and local text match only; source, sentence boundaries and semantic support require review"
-}
