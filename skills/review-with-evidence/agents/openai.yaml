@@ -1,0 +1,4 @@
+interface:
+  display_name: "有据文献综述"
+  short_description: "按期刊要求组织研究论文综述章节并逐条核验原文证据与引用"
+  default_prompt: "使用 $review-with-evidence，根据目标期刊与范文撰写有原文佐证的文献综述章节。"
